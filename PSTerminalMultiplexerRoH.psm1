@@ -1,7 +1,6 @@
 ﻿$Host.UI.RawUI.BackgroundColor = 'black'
 $Host.UI.RawUI.ForegroundColor = 'white'
 $Host.UI.RawUI.WindowTitle = 'PS TerminalMultiplexer'
-#Clear-Host
 $Host.UI.WriteLine(
 "Welcome to PowerShell Terminal Multiplexer.
 You can split your screen vertical by using the function <Split-Vertical> 
@@ -108,12 +107,12 @@ function Split-Vertical{
 
     #Move old console
     [void][Terminal]::MoveWindow($Handle, $ConsoleRect.Left, $ConsoleRect.Top, ($ConsoleRect.Right - $ConsoleRect.Left) /2, ($ConsoleRect.Bottom - $ConsoleRect.Top), $true)
-    $ConsoleRect | Out-File C:\Users\User\Downloads\PSMulti.txt -Append
 
     #Move new console
-    [void][Terminal]::MoveWindow($HandleNew, $ConsoleRect.Left + ($ConsoleRect.Right - $ConsoleRect.Left) /2 -8, $ConsoleRect.Top, ($ConsoleRect.Right - $ConsoleRect.Left) / 2 +8, ($ConsoleRect.Bottom - $ConsoleRect.Top), $true)
-    [Terminal]::GetWindowRect($HandleNew,[Ref]$ConsoleRectNew)
-    $ConsoleRectNew | Out-File C:\Users\User\Downloads\PSMulti.txt -Append
+    [void][Terminal]::MoveWindow($HandleNew, $ConsoleRect.Left + ($ConsoleRect.Right - $ConsoleRect.Left) /2, $ConsoleRect.Top, ($ConsoleRect.Right - $ConsoleRect.Left) / 2, ($ConsoleRect.Bottom - $ConsoleRect.Top), $true)
+    
+    Clear-Host
+
     #Runs command in current session
     powershell -command $Scriptblock
 }
@@ -186,11 +185,12 @@ function Split-Horizontal{
 
     #Move old console
     [void][Terminal]::MoveWindow($Handle, $ConsoleRect.Left, $ConsoleRect.Top, ($ConsoleRect.Right - $ConsoleRect.Left), ($ConsoleRect.Bottom - $ConsoleRect.Top) /2, $true)
-    $ConsoleRect | Out-File C:\Users\User\Downloads\PSMulti.txt -Append
+
     #Move new console
-    [void][Terminal]::MoveWindow($HandleNew, $ConsoleRect.Left, $ConsoleRect.Top + ($ConsoleRect.Bottom - $ConsoleRect.Top) /2 - 8, ($ConsoleRect.Right - $ConsoleRect.Left), ($ConsoleRect.Bottom -$ConsoleRect.Top) /2 +8, $true)
-    [Terminal]::GetWindowRect($HandleNew,[Ref]$ConsoleRectNew)
-    $ConsoleRectNew | Out-File C:\Users\User\Downloads\PSMulti.txt -Append
+    [void][Terminal]::MoveWindow($HandleNew, $ConsoleRect.Left, $ConsoleRect.Top + ($ConsoleRect.Bottom - $ConsoleRect.Top) /2, ($ConsoleRect.Right - $ConsoleRect.Left), ($ConsoleRect.Bottom -$ConsoleRect.Top) /2, $true)
+    
+    Clear-Host
+
     #Runs command in current session
     powershell -command $Scriptblock
 }
