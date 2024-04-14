@@ -127,7 +127,7 @@ Get-Help -Name <FunctionName> -Full
 Get help on the profile use:
 
 ```PowerShell
-# Works only in is current location is the profile directory.
+# Works only if current location is the profile directory.
 Get-Help -Name .\profile.ps1 -Full
 ```
 
